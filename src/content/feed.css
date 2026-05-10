@@ -1,0 +1,415 @@
+/*
+ * Intentional YouTube — feed.css
+ * Styles for the custom feed UI injected into YouTube pages.
+ * Scoped under #iy-root to avoid collisions with YouTube's own styles.
+ */
+
+/* ─── Reset / base ─────────────────────────────────────────────────────────── */
+#iy-root *,
+#iy-root *::before,
+#iy-root *::after {
+  box-sizing: border-box;
+}
+
+#iy-root {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: #f9f9f9;
+  overflow-y: auto;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  color: #1a1a1a;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── Feed wrapper ─────────────────────────────────────────────────────────── */
+.iy-feed {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px 64px;
+  animation: iy-fadein 0.25s ease;
+}
+
+@keyframes iy-fadein {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── Header ───────────────────────────────────────────────────────────────── */
+.iy-feed__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 0 16px;
+  border-bottom: 1px solid #e8e8e8;
+  margin-bottom: 32px;
+}
+
+.iy-feed__wordmark {
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: #111;
+}
+
+.iy-feed__resync {
+  background: none;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-size: 14px;
+  cursor: pointer;
+  color: #555;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.iy-feed__resync:hover { background: #f0f0f0; border-color: #bbb; }
+.iy-feed__resync:disabled { opacity: 0.4; cursor: not-allowed; }
+
+/* ─── Sections ─────────────────────────────────────────────────────────────── */
+.iy-section {
+  margin-bottom: 48px;
+}
+
+.iy-section__title {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #888;
+  margin-bottom: 20px;
+}
+
+/* ─── Video grid ───────────────────────────────────────────────────────────── */
+.iy-video-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+/* ─── Video card ───────────────────────────────────────────────────────────── */
+.iy-video-card {
+  border-radius: 10px;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid #e8e8e8;
+  transition: box-shadow 0.15s, transform 0.15s;
+}
+
+.iy-video-card:hover {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  transform: translateY(-2px);
+}
+
+.iy-video-card__link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.iy-video-card__thumb-wrap {
+  position: relative;
+  padding-top: 56.25%; /* 16:9 */
+  background: #eee;
+  overflow: hidden;
+}
+
+.iy-video-card__thumb {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.iy-video-card__meta {
+  padding: 12px 14px 14px;
+}
+
+.iy-video-card__channel {
+  font-size: 11px;
+  font-weight: 600;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 4px;
+}
+
+.iy-video-card__title {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.4;
+  color: #111;
+  margin-bottom: 6px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.iy-video-card__time {
+  font-size: 11px;
+  color: #aaa;
+}
+
+/* ─── Channel list (recs) ──────────────────────────────────────────────────── */
+.iy-channel-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* ─── Channel card ─────────────────────────────────────────────────────────── */
+.iy-channel-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  border-radius: 10px;
+  background: #fff;
+  border: 1px solid #e8e8e8;
+}
+
+.iy-channel-card__avatar-wrap {
+  flex-shrink: 0;
+}
+
+.iy-channel-card__avatar,
+.iy-channel-card__avatar-placeholder {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.iy-channel-card__avatar-placeholder {
+  background: #e0e0e0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 600;
+  color: #777;
+}
+
+.iy-channel-card__info {
+  flex: 1;
+  min-width: 0;
+}
+
+.iy-channel-card__name {
+  font-size: 14px;
+  font-weight: 600;
+  color: #111;
+  margin-bottom: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.iy-channel-card__topic {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  background: #f0f0f0;
+  color: #666;
+  border-radius: 4px;
+  padding: 2px 6px;
+  margin-bottom: 4px;
+}
+
+.iy-channel-card__desc {
+  font-size: 12px;
+  color: #777;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.iy-channel-card__btn {
+  flex-shrink: 0;
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: 8px;
+  background: #f5f5f5;
+  border: 1px solid #e0e0e0;
+  font-size: 13px;
+  font-weight: 500;
+  color: #222;
+  text-decoration: none;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.iy-channel-card__btn:hover {
+  background: #ebebeb;
+  border-color: #bbb;
+}
+
+/* ─── End of feed ──────────────────────────────────────────────────────────── */
+.iy-end-of-feed {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 0 24px;
+  text-align: center;
+  color: #bbb;
+}
+
+.iy-end-of-feed__icon {
+  font-size: 28px;
+  margin-bottom: 10px;
+  color: #ccc;
+}
+
+.iy-end-of-feed__msg {
+  font-size: 15px;
+  font-weight: 500;
+  color: #999;
+}
+
+.iy-end-of-feed__sub {
+  font-size: 12px;
+  color: #bbb;
+  margin-top: 4px;
+}
+
+/* ─── State screens ────────────────────────────────────────────────────────── */
+.iy-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 24px;
+  text-align: center;
+  gap: 16px;
+  color: #888;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.iy-spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid #e0e0e0;
+  border-top-color: #1a73e8;
+  border-radius: 50%;
+  animation: iy-spin 0.7s linear infinite;
+}
+
+@keyframes iy-spin { to { transform: rotate(360deg); } }
+
+.iy-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 8px;
+  background: #1a73e8;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.iy-btn:hover { background: #1765cc; }
+.iy-btn:disabled { background: #9dc0f5; cursor: not-allowed; }
+
+.iy-hint {
+  font-size: 12px;
+  color: #aaa;
+}
+
+.iy-hint a { color: #888; }
+
+/* ─── Friction prompt ──────────────────────────────────────────────────────── */
+.iy-friction {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 200;
+  background: rgba(30,30,30,0.88);
+  backdrop-filter: blur(6px);
+  color: #f5f5f5;
+  border-radius: 10px;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 13px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.25);
+  animation: iy-fadein 0.2s ease;
+}
+
+.iy-friction__dismiss {
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 6px;
+  color: #fff;
+  padding: 5px 12px;
+  font-size: 12px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s;
+}
+
+.iy-friction__dismiss:hover { background: rgba(255,255,255,0.25); }
+
+/* ─── Shorts block screen ──────────────────────────────────────────────────── */
+#iy-shorts-block-root {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: #f9f9f9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.iy-shorts-block {
+  text-align: center;
+  padding: 40px;
+}
+
+.iy-shorts-block__inner {
+  max-width: 360px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+}
+
+.iy-shorts-block__title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #222;
+}
+
+.iy-shorts-block__body {
+  font-size: 14px;
+  color: #777;
+  line-height: 1.6;
+}
+
+/* ─── Return to feed link (injected in masthead) ───────────────────────────── */
+.iy-return-link {
+  font-size: 13px;
+  color: #555;
+  text-decoration: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  background: #fff;
+  margin-right: 12px;
+  display: inline-block;
+  transition: background 0.15s;
+}
+
+.iy-return-link:hover { background: #f5f5f5; }

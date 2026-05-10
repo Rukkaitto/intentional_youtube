@@ -1,0 +1,81 @@
+/*
+ * Intentional YouTube — hide.css
+ * Injected at document_start before YouTube renders.
+ * We hide native feed surfaces, recommendation panels, autoplay UI,
+ * Shorts surfaces, and end-screen overlays.
+ * All selectors have a primary + attribute-based fallback form.
+ */
+
+/* ─── Home feed ────────────────────────────────────────────────────────────── */
+ytd-browse[page-subtype="home"] ytd-rich-grid-renderer,
+ytd-browse[page-subtype="home"] ytd-rich-grid-renderer + *,
+ytd-browse[page-subtype="home"] #contents.ytd-rich-grid-renderer {
+  display: none !important;
+}
+
+/* ─── Subscriptions native grid ─────────────────────────────────────────────── */
+ytd-browse[page-subtype="subscriptions"] ytd-section-list-renderer,
+ytd-browse[page-subtype="subscriptions"] #contents.ytd-section-list-renderer {
+  display: none !important;
+}
+
+/* ─── Up Next / related sidebar ─────────────────────────────────────────────── */
+#related,
+ytd-watch-next-secondary-results-renderer,
+ytd-compact-video-renderer,
+ytd-watch-flexy ytd-watch-next-secondary-results-renderer {
+  display: none !important;
+}
+
+/* ─── Autoplay toggle ────────────────────────────────────────────────────────── */
+.ytp-autonav-toggle-button-container {
+  display: none !important;
+}
+
+/* ─── End-screen overlays ────────────────────────────────────────────────────── */
+.ytp-ce-element,
+.ytp-endscreen-content,
+.ytp-ce-covering-overlay,
+.ytp-ce-expanding-overlay {
+  display: none !important;
+}
+
+/* ─── Shorts shelves in feed ─────────────────────────────────────────────────── */
+ytd-rich-shelf-renderer[is-shorts],
+ytd-reel-shelf-renderer,
+ytd-rich-shelf-renderer[feature-type="SHORTS"],
+ytd-shorts {
+  display: none !important;
+}
+
+/* ─── Shorts navigation entries ──────────────────────────────────────────────── */
+ytd-guide-entry-renderer a[href="/shorts"],
+ytd-mini-guide-entry-renderer a[href="/shorts"],
+a[title="Shorts"],
+ytd-mini-guide-entry-renderer[aria-label="Shorts"],
+ytd-guide-entry-renderer[aria-label="Shorts"] {
+  display: none !important;
+}
+
+/* ─── Masthead search suggestions (keep search, hide video suggestions) ─────── */
+/* leave this; not hiding search is intentional per spec */
+
+/* ─── Chips / filter bar on home ─────────────────────────────────────────────── */
+ytd-browse[page-subtype="home"] #chips-wrapper,
+ytd-browse[page-subtype="home"] yt-chip-cloud-renderer {
+  display: none !important;
+}
+
+/* ─── "What to watch next" / mix shelves on watch page ───────────────────────── */
+ytd-watch-next-secondary-results-renderer ytd-shelf-renderer,
+ytd-watch-next-secondary-results-renderer ytd-radio-renderer {
+  display: none !important;
+}
+
+/* ─── Notification dot / badge on bell ────────────────────────────────────────── */
+/* keep notifications; removing would break user agency */
+
+/* ─── IY feed container: ensure our custom UI is always visible ──────────────── */
+#iy-root {
+  display: block !important;
+}
