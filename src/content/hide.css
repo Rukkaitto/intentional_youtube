@@ -75,6 +75,35 @@ ytd-watch-next-secondary-results-renderer ytd-radio-renderer {
 /* ─── Notification dot / badge on bell ────────────────────────────────────────── */
 /* keep notifications; removing would break user agency */
 
+/* ─── Left sidebar (guide / nav drawer) on feed pages ───────────────────────── */
+/*
+ * Hide the full guide drawer, the mini guide rail, and the app drawer
+ * on home and subscriptions pages so our full-screen feed has no leftover
+ * chrome from YouTube's layout.
+ */
+ytd-browse[page-subtype="home"] ~ ytd-guide-renderer,
+ytd-browse[page-subtype="subscriptions"] ~ ytd-guide-renderer,
+ytd-app ytd-guide-renderer,
+#guide,
+#guide-wrapper,
+app-drawer,
+tp-yt-app-drawer,
+ytd-app[guide-persistent-and-visible] #content.ytd-page-manager,
+ytd-mini-guide-renderer {
+  display: none !important;
+}
+
+/* Remove the left margin that YouTube's layout reserves for the guide rail.
+   Also zero out #page-manager's offset which YouTube sets inline via JS. */
+ytd-browse[page-subtype="home"],
+ytd-browse[page-subtype="subscriptions"] {
+  margin-left: 0 !important;
+}
+
+#page-manager.ytd-app {
+  margin-left: 0 !important;
+}
+
 /* ─── IY feed container: ensure our custom UI is always visible ──────────────── */
 #iy-root {
   display: block !important;
